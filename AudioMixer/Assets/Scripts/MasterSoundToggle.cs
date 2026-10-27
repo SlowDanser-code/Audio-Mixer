@@ -1,16 +1,13 @@
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
 
 [RequireComponent(typeof(Button))]
 public class MasterSoundToggle : MonoBehaviour
 {
-    private const string MasterVolumeParameter = "MasterVolume";
-    private const float NormalVolume = 0f;
-    private const float MutedVolume = -80f;
+    private const float MutedVolume = 0f;
+    private const float NormalVolume = 1f;
 
-    [SerializeField] private AudioMixer _audioMixer;
     [SerializeField] private TMP_Text _buttonText;
 
     private Button _button;
@@ -47,12 +44,12 @@ public class MasterSoundToggle : MonoBehaviour
     {
         if (_isMuted)
         {
-            _audioMixer.SetFloat(MasterVolumeParameter, MutedVolume);
+            AudioListener.volume = MutedVolume;
             _buttonText.text = "Включить звук";
         }
         else
         {
-            _audioMixer.SetFloat(MasterVolumeParameter, NormalVolume);
+            AudioListener.volume = NormalVolume;
             _buttonText.text = "Выключить звук";
         }
     }
